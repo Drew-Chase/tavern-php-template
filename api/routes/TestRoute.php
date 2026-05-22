@@ -11,7 +11,7 @@ class TestRoute
 {
     static function index(Request $request, Response $response, $args): Response
     {
-        $response->getBody()->write(json_encode(["message" => "Hello World!"]));
+        $response->getBody()->write(json_encode(["message" => "Message from the API"]));
 
         return $response
             ->withStatus(200)

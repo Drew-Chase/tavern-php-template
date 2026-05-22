@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../set_root.php';
 
+use routes\TestRoute;
 use Slim\Factory\AppFactory;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
@@ -42,5 +43,8 @@ $errorMiddleware->setDefaultErrorHandler(
             ->withHeader('Content-Type', 'application/json');
     }
 );
+
+// ENDPOINTS
+TestRoute::configure($app);
 
 $app->run();
