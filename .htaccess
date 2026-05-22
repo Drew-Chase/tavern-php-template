@@ -1,0 +1,21 @@
+#### ==================== THIS SECTION WAS ADDED MANUALLY   ==================== ####
+#### ==================== Author: Drew Chase                ==================== ####
+#### ==================== Date: 05/22/2026                  ==================== ####
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Route /api/* requests to /api/index.php
+    RewriteRule ^api(/.*)?$ api/index.php [L,QSA]
+
+    # Don't rewrite files or directories that exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Block access to confedential files and directories
+    <Files ".env">
+      Require all denied
+    </Files>
+
+    # Route everything else to index.html for React Router
+    RewriteRule ^ index.html [L]
+</IfModule>
