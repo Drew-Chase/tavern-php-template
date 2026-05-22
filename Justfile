@@ -19,6 +19,8 @@ build: install
     Copy-Item ./.env.production ./dist/.env -Force
     Copy-Item ./.htaccess ./dist/ -Force
     Copy-Item ./nginx.conf ./dist/ -Force
+    Copy-Item ./composer.json ./dist/ -Force
+    Copy-Item ./set_root.php ./dist/ -Force
 
 [linux]
 [macos]
@@ -28,3 +30,5 @@ build: install
     cp ./.env ./dist/
     cp ./.htaccess ./dist/
     cp ./nginx.conf ./dist/
+    cp ./composer.json ./dist/
+    cp ./set_root.php ./dist/
