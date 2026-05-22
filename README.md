@@ -72,12 +72,38 @@ tavern-php-template/
 │   │   └── ThemeProvider.tsx
 │   ├── css/
 │   └── main.tsx           # App entry point + router
+├── .env                   # Dev environment variables
+├── .env.production        # Production environment variables (copied to dist/.env on Windows build)
+├── .htaccess              # Apache URL rewriting + .env protection
+├── nginx.conf             # nginx server block config
 ├── composer.json
 ├── package.json
 ├── vite.config.ts
 ├── tailwind.config.js
 └── Justfile
 ```
+
+---
+
+## Environment Variables
+
+Add variables to `.env` for development and `.env.production` for production builds.
+
+```ini
+# .env / .env.production
+MY_VAR=my_value
+```
+
+Read them in PHP with `parse_ini_file`:
+
+```php
+$env = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/.env');
+$value = $env['MY_VAR'];
+```
+
+> `TestRoute.php` demonstrates this pattern — it reads `.env` and returns its contents in the API response.
+
+**Note**: `.env` is blocked from direct HTTP access by both `.htaccess` and `nginx.conf`. Never expose secret values through an API response in production.
 
 ---
 
@@ -143,14 +169,25 @@ tavern-php-template/
 just build
 ```
 
-### Without `just`
+The build output lands in `dist/`. The following are copied alongside the compiled frontend assets:
+
+| File / Dir | Windows | Linux / macOS |
+|---|---|---|
+| `api/` | yes | yes |
+| `.env.production` → `dist/.env` | yes | — |
+| `.env` → `dist/.env` | — | yes |
+| `.htaccess` | yes | yes |
+| `nginx.conf` | yes | yes |
+
+### Without `just` (manual)
 
 ```sh
 pnpm run build
-# Then copy the api/ directory into dist/
+cp -r api dist/
+cp .env.production dist/.env   # Windows: use .env.production
+cp .htaccess dist/
+cp nginx.conf dist/
 ```
-
-The build output lands in `dist/`. The `api/` directory and `.env` file are copied alongside the compiled frontend assets.
 
 ### Deploying with Apache
 
