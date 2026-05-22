@@ -11,7 +11,8 @@ class TestRoute
 {
     static function index(Request $request, Response $response, $args): Response
     {
-        $response->getBody()->write(json_encode(["message" => "Message from the API"]));
+        $env = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . "/.env");
+        $response->getBody()->write(json_encode(["message" => "Message from the API", "env" => $env]));
 
         return $response
             ->withStatus(200)
