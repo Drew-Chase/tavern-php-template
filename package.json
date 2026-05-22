@@ -12,8 +12,7 @@
 		"dev": "concurrently \"pnpm dev:frontend\" \"pnpm dev:api\" --names \"React,PHP\" --prefix-colors \"cyan,magenta\"",
 		"dev:frontend": "vite",
 		"dev:api": "php -S localhost:8000 -t api",
-		"build": "tsc && vite build && pnpm build:api",
-		"build:api": "node scripts/build-api.js"
+		"build": "tsc && vite build"
 	},
 	"dependencies": {
 		"@heroui/react": "^2.8.5",

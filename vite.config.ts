@@ -3,12 +3,6 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
     plugins: [react()],
-    esbuild: {
-        legalComments: "none",
-        supported: {
-            "top-level-await": true // browsers can handle top-level-await features
-        }
-    },
     clearScreen: false,
     server: {
         host: true,
@@ -21,11 +15,18 @@ export default defineConfig({
             clientPort: 3000,
             overlay: true
         },
+        "proxy": {
+            "/api": {
+                target: "http://localhost:8000",
+                changeOrigin: true,
+                secure: false
+            }
+        },
         watch: {
             ignored: ["**/src-*/**"]
         }
     },
     build: {
-        outDir: "target/wwwroot"
+        outDir: "dist/"
     }
 });
