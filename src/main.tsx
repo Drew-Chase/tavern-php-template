@@ -2,11 +2,11 @@ import React from "react";
 import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
 import ReactDOM from "react-dom/client";
 
-import "./assets/css/index.css";
-import Home from "./assets/pages/Home.tsx";
-import About from "./assets/pages/About.tsx";
-import Navigation from "./assets/components/Navigation.tsx";
-import {ThemeProvider} from "./assets/providers/ThemeProvider.tsx";
+import "./css/index.css";
+import Home from "./pages/Home.tsx";
+import About from "./pages/About.tsx";
+import Navigation from "./components/Navigation.tsx";
+import {ThemeProvider} from "./providers/ThemeProvider.tsx";
 import {HeroUIProvider} from "@heroui/react";
 
 
